@@ -18,7 +18,7 @@ def common_ancestor(target, current='HEAD'):
     Raises:
     GitException: if git-merge cannot find a common ancestor.
     """
-    output_format = lambda o: str(o)[:-1]
+    output_format = lambda o: o.decode('utf-8')[:-1]
     try:
         output = subprocess.check_output(
             ['git', 'merge-base', current, target],
