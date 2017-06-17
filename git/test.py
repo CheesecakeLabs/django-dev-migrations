@@ -1,6 +1,6 @@
 import unittest
 
-from .common_ancestor import common_ancestor
+from .utils import common_ancestor
 from .exceptions import GitException
 
 
