@@ -28,3 +28,32 @@ def common_ancestor(target, current='HEAD'):
         raise GitException(output_format(e.output))
     else:
         return output_format(output)
+
+
+def diff_files(target, current='HEAD'):
+    """
+    Get list of changed files between two commit refs.
+
+    Args:
+    target (string): name of branch to compare to current.
+    current (string): name of current branch. Defaults to HEAD.
+
+    Returns:
+    list: name of files that were changed between current and target.
+    """
+    try:
+        bin_output = subprocess.check_output(
+            ['git', 'diff', current, target, '--name-only'],
+            stderr=subprocess.STDOUT
+        )
+    except subprocess.CalledProcessError as e:
+        raise GitException('Error getting diff between commits {} and {}'.format(
+            current,
+            target
+        ))
+    else:
+        output = bin_output.decode('utf-8')
+
+        # Remove empty strings
+        return filter(bool, output.split('\n'))
+
