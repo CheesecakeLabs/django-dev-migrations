@@ -1,5 +1,8 @@
 # Python virtualenv
 venv/
 
-# Python Compiled Bytecode
+# Python compiled bytecode
 *.pyc
+
+# Python development eggs
+*.egg-info
