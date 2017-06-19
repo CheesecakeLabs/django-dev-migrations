@@ -18,16 +18,15 @@ def common_ancestor(target, current='HEAD'):
     Raises:
     GitException: if git-merge cannot find a common ancestor.
     """
-    output_format = lambda o: o.decode('utf-8')[:-1]
     try:
         output = subprocess.check_output(
             ['git', 'merge-base', current, target],
             stderr=subprocess.STDOUT
         )
     except subprocess.CalledProcessError as e:
-        raise GitException(output_format(e.output))
+        raise GitException(e.output.decode('utf-8')[:-1])
     else:
-        return output_format(output)
+        return output.decode('utf-8')[:-1]
 
 
 def diff_files(target, current='HEAD'):
