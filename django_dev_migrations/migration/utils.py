@@ -15,7 +15,8 @@ def filter_migration_files(files_list):
     list: files corresponding to migration files.
     """
     # Remove pycache files from list
-    clean_files_list = filter(lambda f: r'.*__pycache__.*'.match(f), files_list)
+    not_pycache = lambda f: not re.compile('.*__pycache__.*').match(f)
+    clean_files_list = list(filter(not_pycache, files_list))
 
     # Get list of migration folders
     default_migration_folder = '^[\w\-\.]*/migrations/[\w\-\. ]+\.py$'
