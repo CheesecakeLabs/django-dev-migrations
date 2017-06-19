@@ -40,6 +40,9 @@ def diff_files(target, current='HEAD'):
 
     Returns:
     list: name of files that were changed between current and target.
+
+    Raises:
+    GitException: if any error occur while executing diff.
     """
     try:
         bin_output = subprocess.check_output(
@@ -55,5 +58,29 @@ def diff_files(target, current='HEAD'):
         output = bin_output.decode('utf-8')
 
         # Remove empty strings
-        return filter(bool, output.split('\n'))
+        return list(filter(bool, output.split('\n')))
 
+
+def get_file_content_from_commit(file_name, commit_ref):
+    """
+    Get the content a file from a given commit reference.
+
+    Args:
+    file_name (string): the file path.
+    commit_ref (string): the commit SHA-1 reference.
+
+    Returns:
+    string: the given file content.
+
+    Raises:
+    GitException: if any error occur while executing show.
+    """
+    try:
+        bin_output = subprocess.check_output(
+            ['git', 'show', '{}:{}'.format(commit_ref, file_name)],
+            stderr=subprocess.STDOUT
+        )
+    except subprocess.CalledProcessError as e:
+        raise GitException('Could not get file {} from {}'.format(file_name, commit_ref))
+    else:
+        return bin_output.decode('utf-8')
