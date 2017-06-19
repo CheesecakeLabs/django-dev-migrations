@@ -1,2 +1,5 @@
+# Django
+Django==1.11.2
+
 # Style and semantic verification
 flake8==3.3.0
