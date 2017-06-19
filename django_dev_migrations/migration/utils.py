@@ -15,13 +15,14 @@ def filter_migration_files(files_list):
     list: files corresponding to migration files.
     """
     # Remove pycache files from list
-    not_pycache = lambda f: not re.compile('.*__pycache__.*').match(f)
-    clean_files_list = list(filter(not_pycache, files_list))
+    clean_files_list = list(
+        filter(lambda f: not re.compile('.*__pycache__.*').match(f), files_list)
+    )
 
     # Get list of migration folders
     default_migration_folder = '^[\w\-\.]*/migrations/[\w\-\. ]+\.py$'
     other_migration_folders = [
-        '^[\w\-\.]*/{}.py$'.format(odule.replace('.', '/'))
+        '^[\w\-\.]*/{}.py$'.format(module.replace('.', '/'))
         for _, module in settings.MIGRATION_MODULES.items()
     ]
 
