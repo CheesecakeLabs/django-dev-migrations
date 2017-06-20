@@ -1,6 +1,6 @@
 import subprocess
 
-from .exceptions import GitException
+from .exceptions import GitDirNotFound, GitException
 
 
 def common_ancestor(target, current='HEAD'):
@@ -81,5 +81,23 @@ def get_file_content_from_commit(file_name, commit_ref):
         )
     except subprocess.CalledProcessError as e:
         raise GitException('Could not get file {} from {}'.format(file_name, commit_ref))
+    else:
+        return bin_output.decode('utf-8')
+
+
+def find_git_directory():
+    """
+    Search for git directory (in case the user in not on the project root).
+
+    Returns:
+    string: path to git directory
+    """
+    try:
+        bin_output = subprocess.check_output(
+            ['git', 'rev-parse', '--git-dir'],
+            stderr=subprocess.STDOUT
+        )
+    except subprocess.CalledProcessError as e:
+        raise GitDirNotFound()
     else:
         return bin_output.decode('utf-8')
