@@ -64,7 +64,7 @@ HOOK_TEMPLATE = """#!{shebang}
 
 import sys
 
-from django_dev_module import check_migrations
+from django_dev_migrations import check_migrations
 
 if __name__ == '__main__':
     sys.exit(check_migrations())

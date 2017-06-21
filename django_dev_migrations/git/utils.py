@@ -100,4 +100,4 @@ def find_git_directory():
     except subprocess.CalledProcessError as e:
         raise GitDirNotFound()
     else:
-        return bin_output.decode('utf-8')
+        return bin_output.decode('utf-8')[:-1]
