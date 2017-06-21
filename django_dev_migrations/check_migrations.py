@@ -5,7 +5,7 @@ from .migration.utils import filter_migration_files
 
 
 def check_migrations():
-    sys.stdout.write('Verifying migrations...')
+    sys.stdout.write('Verifying migrations...\n')
 
     current = sys.argv[1]
     target = sys.argv[2]
@@ -15,8 +15,8 @@ def check_migrations():
     migration_files = filter_migration_files(files_diff)
 
     if len(migration_files) > 0:
-        sys.stdout.write('There are migrations applied to this branch.')
+        sys.stdout.write('There are migrations applied to this branch.\n')
         for file in migration_files:
-            sys.stdout.write(file)
+            sys.stdout.write('{}\n'.format(file))
     else:
-        sys.stdout.write('No migrations found.')
+        sys.stdout.write('No migrations found.\n')
