@@ -1,4 +1,4 @@
-# Django Dev Migrations
+# Django Nomad
 
 A Django extension to make your life easier when dealing with migrations in multiple branches.
 
@@ -8,5 +8,5 @@ Before getting started, please install the project dependencies and after that e
 commit hook:
 
 ```
-flake8 --install-hook git
+python -m flake8 --install-hook git
 ```

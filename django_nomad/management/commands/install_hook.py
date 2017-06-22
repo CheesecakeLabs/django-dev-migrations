@@ -3,8 +3,8 @@ import sys
 
 from django.core.management.base import BaseCommand
 
-from django_dev_migrations.git.exceptions import GitHookAlreadyExists
-from django_dev_migrations.git.utils import find_git_directory
+from django_nomad.git.exceptions import GitHookAlreadyExists
+from django_nomad.git.utils import find_git_directory
 
 
 class Command(BaseCommand):

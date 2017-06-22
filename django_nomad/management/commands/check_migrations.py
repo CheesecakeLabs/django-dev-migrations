@@ -2,8 +2,8 @@ import sys
 
 from django.core.management.base import BaseCommand
 
-from django_dev_migrations.git.utils import common_ancestor, diff_files
-from django_dev_migrations.migration.utils import (
+from django_nomad.git.utils import common_ancestor, diff_files
+from django_nomad.migration.utils import (
     extract_migration_info_from_path,
     filter_migration_files,
     is_migration_applied,

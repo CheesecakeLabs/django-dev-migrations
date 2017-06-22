@@ -16,7 +16,7 @@ setup(
     description='Easily handle migrations in dev mode',
     include_package_data=True,
     install_requires=['django'],
-    name='django-dev-migrations',
+    name='django-nomad',
     packages=find_packages(),
     version='0.0.1'
 )
