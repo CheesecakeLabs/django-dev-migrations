@@ -70,5 +70,5 @@ if __name__ == '__main__':
     if len(sys.argv) > 3:
         current = sys.argv[1]
         target = sys.argv[2]
-        sys.exit(call_command('check_migrations', (current, target)))
+        sys.exit(call_command('check_nomad_migrations', (current, target)))
 """
