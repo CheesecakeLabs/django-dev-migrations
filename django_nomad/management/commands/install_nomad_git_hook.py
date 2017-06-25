@@ -13,11 +13,9 @@ class Command(BaseCommand):
         files.
     """
 
-    def __init__(self, *args, **kwargs):
-        git_path = find_git_directory()
-        hooks_path = os.path.join(git_path, 'hooks')
-        self.post_checkout_path = os.path.abspath(os.path.join(hooks_path, 'post-checkout'))
-        return super().__init__(*args, **kwargs)
+    git_path = find_git_directory()
+    hooks_path = os.path.join(git_path, 'hooks')
+    post_checkout_path = os.path.abspath(os.path.join(hooks_path, 'post-checkout'))
 
     def add_arguments(self, *args):
         pass
@@ -58,17 +56,24 @@ class Command(BaseCommand):
         with open(self.post_checkout_path, 'w') as f:
             shebang = self.create_user_env_python_shebang()
             f.write(HOOK_TEMPLATE.format(shebang=shebang))
+        os.chmod(self.post_checkout_path, 0o555)
 
 
 HOOK_TEMPLATE = """#!{shebang}
 
+import subprocess
 import sys
-
-from django.core.management import call_command
 
 if __name__ == '__main__':
     if len(sys.argv) > 3:
         current = sys.argv[1]
         target = sys.argv[2]
-        sys.exit(call_command('check_nomad_migrations', (current, target)))
+
+        try:
+            sys.exit(subprocess.check_output(
+                ['python', 'manage.py', 'check_nomad_migrations', current, target],
+                stderr=subprocess.STDOUT
+            ))
+        except Exception as error:
+            sys.stdout.write('An error happened checking migrations: %s' % error)
 """
