@@ -8,6 +8,7 @@ from django_nomad.migration.utils import (
     filter_migration_files,
     is_migration_applied,
 )
+from ..utils import print_color
 
 
 class Command(BaseCommand):
@@ -16,7 +17,7 @@ class Command(BaseCommand):
         parser.add_argument('target')
 
     def handle(self, *args, **kwargs):
-        sys.stdout.write('Verifying migrations...\n')
+        print_color('Verifying migrations...', 'BLUE')
 
         current = kwargs['current']
         target = kwargs['target']
@@ -32,8 +33,8 @@ class Command(BaseCommand):
                 applied_migration_files.append(migration)
 
         if len(applied_migration_files) > 0:
-            sys.stdout.write('There are migrations applied to this branch.\n')
+            print_color('There are nomad migrations applied to this branch:', 'RED')
             for file in applied_migration_files:
-                sys.stdout.write('{}\n'.format(file))
+                print_color('    {}'.format(file), 'RED')
         else:
-            sys.stdout.write('No migrations found.\n')
+            print_color('No nomad migrations found', 'GREEN')

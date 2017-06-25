@@ -25,7 +25,7 @@ class Command(BaseCommand):
             raise GitHookAlreadyExists()
 
         self.copy_hook_to_post_checkout_folder()
-        sys.stdout.write('post-checkout file was created...')
+        print('post-checkout file was created...')
 
     def has_post_checkout_file(self):
         """
@@ -61,19 +61,19 @@ class Command(BaseCommand):
 
 HOOK_TEMPLATE = """#!{shebang}
 
-import subprocess
+import os
 import sys
 
 if __name__ == '__main__':
     if len(sys.argv) > 3:
         current = sys.argv[1]
         target = sys.argv[2]
+        is_branch = int(sys.argv[3])
 
-        try:
-            sys.exit(subprocess.check_output(
-                ['python', 'manage.py', 'check_nomad_migrations', current, target],
-                stderr=subprocess.STDOUT
-            ))
-        except Exception as error:
-            sys.stdout.write('An error happened checking migrations: %s' % error)
+        if not is_branch:
+            sys.exit(0)
+        else:
+            output = os.system('python manage.py check_nomad_migrations %s %s' % (current, target))
+            if output > 0:
+                print('An error happened checking migrations: %s' % error)
 """
