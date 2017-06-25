@@ -67,4 +67,5 @@ def is_migration_applied(app, name):
     """
     db_connection = connections[DEFAULT_DB_ALIAS]
     recorder = MigrationRecorder(db_connection)
-    return recorder.record_applied(app=app, name=name)
+    migrations = recorder.applied_migrations()
+    return migrations.intersection({(app, name)})
