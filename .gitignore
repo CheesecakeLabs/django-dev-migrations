@@ -6,3 +6,6 @@ venv/
 
 # Python development eggs
 *.egg-info
+
+# Distribution tars
+dist/

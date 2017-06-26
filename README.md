@@ -9,6 +9,14 @@ Install via pip:
 pip install django-nomad
 ```
 
+Add django nomad to the INSTALLED_APPS on settings.py:
+```
+INSTALLED_APPS = (
+  ... other django apps ...,
+  'django_nomad',
+)
+```
+
 Add the git-hook to your project:
 ```
 python manage.py install_nomad_git_hook
