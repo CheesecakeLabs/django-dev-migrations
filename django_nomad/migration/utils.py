@@ -69,3 +69,25 @@ def is_migration_applied(app, name):
     recorder = MigrationRecorder(db_connection)
     migrations = recorder.applied_migrations()
     return migrations.intersection({(app, name)})
+
+
+def get_migration_operations(file_content, app, name):
+    """
+    Execute file content (expecting it is a migration file), instantiate a migraiton and get its
+    operations attribute.
+
+    Args:
+    file_content (string): a whole migration file content.
+    app (string): name of app to which the migration belongs.
+    name (string): migration name.
+
+    Returns:
+    list: migration operations for given file content, app and name.
+    """
+    exec(file_content, globals())
+
+    if globals().get('Migration'):
+        migration = Migration(app, name)
+        return migration.operations
+
+    return []
