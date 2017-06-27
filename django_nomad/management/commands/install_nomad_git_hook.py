@@ -75,5 +75,5 @@ if __name__ == '__main__':
         else:
             output = os.system('python manage.py check_nomad_migrations %s %s' % (current, target))
             if output > 0:
-                print('An error happened checking migrations: %s' % error)
+                print('An error happened checking migrations.')
 """
