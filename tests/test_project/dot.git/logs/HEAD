@@ -1,0 +1,14 @@
+0000000000000000000000000000000000000000 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509214 -0300	commit (initial): Test project with Django 2.2 initial commit + initial migrations
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509230 -0300	checkout: moving from master to newbranch
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509252 -0300	commit: Test project with Django 2.2 update on migration
+c18c7291e8088fc1b8a19a165c26c31664ac5449 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509263 -0300	checkout: moving from newbranch to master
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509288 -0300	checkout: moving from master to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562509293 -0300	checkout: moving from newbranch to master
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520061 -0300	checkout: moving from master to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520110 -0300	checkout: moving from newbranch to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520111 -0300	checkout: moving from newbranch to master
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520428 -0300	checkout: moving from master to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520429 -0300	checkout: moving from newbranch to master
+526ffeb3e63144bf20e7117974ac4a397a09c1b9 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520441 -0300	checkout: moving from master to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 c18c7291e8088fc1b8a19a165c26c31664ac5449 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520470 -0300	checkout: moving from newbranch to newbranch
+c18c7291e8088fc1b8a19a165c26c31664ac5449 526ffeb3e63144bf20e7117974ac4a397a09c1b9 Bernardo Smaniotto <be.smaniotto@gmail.com> 1562520471 -0300	checkout: moving from newbranch to master

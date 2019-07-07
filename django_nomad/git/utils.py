@@ -3,7 +3,11 @@ import subprocess
 from .exceptions import GitDirNotFound, GitException
 
 
-def common_ancestor(target, current='HEAD'):
+def git_exec(*args):
+    return subprocess.check_output(("git",) + args, stderr=subprocess.STDOUT)
+
+
+def common_ancestor(target, current="HEAD"):
     """
     Find the most recent ancestor commit that is shared between the two branches. This function
     simply calls `git-merge-base` command.
@@ -19,17 +23,14 @@ def common_ancestor(target, current='HEAD'):
     GitException: if git-merge cannot find a common ancestor.
     """
     try:
-        output = subprocess.check_output(
-            ['git', 'merge-base', current, target],
-            stderr=subprocess.STDOUT
-        )
+        output = git_exec("merge-base", current, target)
     except subprocess.CalledProcessError as e:
-        raise GitException(e.output.decode('utf-8')[:-1])
+        raise GitException(e.output.decode("utf-8")[:-1])
     else:
-        return output.decode('utf-8')[:-1]
+        return output.decode("utf-8")[:-1]
 
 
-def diff_files(target, current='HEAD'):
+def diff_files(target, current="HEAD"):
     """
     Get list of changed files between two commit refs.
 
@@ -44,20 +45,16 @@ def diff_files(target, current='HEAD'):
     GitException: if any error occur while executing diff.
     """
     try:
-        bin_output = subprocess.check_output(
-            ['git', 'diff', current, target, '--name-only'],
-            stderr=subprocess.STDOUT
-        )
+        bin_output = git_exec("diff", current, target, "--name-only")
     except subprocess.CalledProcessError as e:
-        raise GitException('Error getting diff between commits {} and {}'.format(
-            current,
-            target
-        ))
+        raise GitException(
+            "Error getting diff between commits {} and {}".format(current, target)
+        )
     else:
-        output = bin_output.decode('utf-8')
+        output = bin_output.decode("utf-8")
 
         # Remove empty strings
-        return list(filter(bool, output.split('\n')))
+        return list(filter(bool, output.split("\n")))
 
 
 def get_file_content_from_commit(file_name, commit_ref):
@@ -75,14 +72,13 @@ def get_file_content_from_commit(file_name, commit_ref):
     GitException: if any error occur while executing show.
     """
     try:
-        bin_output = subprocess.check_output(
-            ['git', 'show', '{}:{}'.format(commit_ref, file_name)],
-            stderr=subprocess.STDOUT
-        )
+        bin_output = git_exec("show", "{}:{}".format(commit_ref, file_name))
     except subprocess.CalledProcessError as e:
-        raise GitException('Could not get file {} from {}'.format(file_name, commit_ref))
+        raise GitException(
+            "Could not get file {} from {}".format(file_name, commit_ref)
+        )
     else:
-        return bin_output.decode('utf-8')
+        return bin_output.decode("utf-8")
 
 
 def find_git_directory():
@@ -93,11 +89,8 @@ def find_git_directory():
     string: path to git directory
     """
     try:
-        bin_output = subprocess.check_output(
-            ['git', 'rev-parse', '--git-dir'],
-            stderr=subprocess.STDOUT
-        )
+        bin_output = git_exec("rev-parse", "--git-dir")
     except subprocess.CalledProcessError as e:
         raise GitDirNotFound()
     else:
-        return bin_output.decode('utf-8')[:-1]
+        return bin_output.decode("utf-8")[:-1]

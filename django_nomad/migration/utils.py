@@ -5,7 +5,7 @@ from django.db import connections, DEFAULT_DB_ALIAS
 from django.db.migrations.recorder import MigrationRecorder
 
 
-MIGRATION_MODULE_TEMPLATE = '[\w\-\.]*/{}/[\w\-\. ]+\.py$'
+MIGRATION_MODULE_TEMPLATE = "[\w\-\.]*/{}/[\w\-\. ]+\.py$"
 
 
 def filter_migration_files(files_list):
@@ -20,21 +20,23 @@ def filter_migration_files(files_list):
     """
     # Remove pycache files from list
     clean_files_list = list(
-        filter(lambda f: not re.compile('.*__pycache__.*').match(f), files_list)
+        filter(lambda f: not re.compile(".*__pycache__.*").match(f), files_list)
     )
 
     # Get list of migration folders
-    default_migration_folder = MIGRATION_MODULE_TEMPLATE.format('migrations')
+    default_migration_folder = MIGRATION_MODULE_TEMPLATE.format("migrations")
     other_migration_folders = [
-        MIGRATION_MODULE_TEMPLATE.format(module.replace('.', '/'))
+        MIGRATION_MODULE_TEMPLATE.format(module.replace(".", "/"))
         for _, module in settings.MIGRATION_MODULES.items()
     ]
 
     # Compile regex that matches migration folders
     generic_migration_folder_list = other_migration_folders + [default_migration_folder]
-    generic_migration_folder_regex = re.compile('|'.join(generic_migration_folder_list))
+    generic_migration_folder_regex = re.compile("|".join(generic_migration_folder_list))
 
-    return list(filter(lambda f: generic_migration_folder_regex.match(f), clean_files_list))
+    return list(
+        filter(lambda f: generic_migration_folder_regex.match(f), clean_files_list)
+    )
 
 
 def extract_migration_info_from_path(path):
@@ -48,9 +50,9 @@ def extract_migration_info_from_path(path):
     Returns:
     app, name (tuple): migration information
     """
-    path_split = path.split('/')
+    path_split = path.split("/")
     app = path_split[-3]
-    name = path_split[-1].replace('.py', '')
+    name = path_split[-1].replace(".py", "")
     return app, name
 
 
@@ -86,7 +88,7 @@ def get_migration_operations(file_content, app, name):
     """
     exec(file_content, globals())
 
-    if globals().get('Migration'):
+    if globals().get("Migration"):
         migration = Migration(app, name)
         return migration.operations
 

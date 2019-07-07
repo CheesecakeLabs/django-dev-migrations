@@ -1,5 +1,14 @@
-# Django
-Django==1.11.2
+# This own package
+-e .
 
-# Style and semantic verification
-flake8==3.3.0
+# Code style
+black
+
+# Testing
+tox
+pytest
+
+# Package publication
+setuptools
+wheel
+twine

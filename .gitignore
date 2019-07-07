@@ -9,3 +9,8 @@ venv/
 
 # Distribution tars
 dist/
+
+# Test files
+.tox/
+.temptest/
+.pytest_*

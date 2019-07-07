@@ -14,8 +14,8 @@ class Command(BaseCommand):
     """
 
     git_path = find_git_directory()
-    hooks_path = os.path.join(git_path, 'hooks')
-    post_checkout_path = os.path.abspath(os.path.join(hooks_path, 'post-checkout'))
+    hooks_path = os.path.join(git_path, "hooks")
+    post_checkout_path = os.path.abspath(os.path.join(hooks_path, "post-checkout"))
 
     def add_arguments(self, *args):
         pass
@@ -25,7 +25,7 @@ class Command(BaseCommand):
             raise GitHookAlreadyExists()
 
         self.copy_hook_to_post_checkout_folder()
-        print('post-checkout file was created...')
+        print("post-checkout file was created...")
 
     def has_post_checkout_file(self):
         """
@@ -46,14 +46,14 @@ class Command(BaseCommand):
         """
         if sys.executable is not None:
             return sys.executable
-        return '/usr/bin/env python'
+        return "/usr/bin/env python"
 
     def copy_hook_to_post_checkout_folder(self):
         """
         Create a post-checkout file and add content from `post-checkout.py` to it, adding the a
         shebang based on user environment to top of file.
         """
-        with open(self.post_checkout_path, 'w') as f:
+        with open(self.post_checkout_path, "w") as f:
             shebang = self.create_user_env_python_shebang()
             f.write(HOOK_TEMPLATE.format(shebang=shebang))
         os.chmod(self.post_checkout_path, 0o555)
