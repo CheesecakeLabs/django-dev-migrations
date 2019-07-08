@@ -7,6 +7,8 @@ black
 # Testing
 tox
 pytest
+pytest-django
+pytest-pythonpath
 
 # Package publication
 setuptools
