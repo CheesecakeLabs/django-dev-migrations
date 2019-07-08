@@ -1,3 +1,6 @@
+from __future__ import print_function
+
+
 STYLES = {
     "RED": "\033[1;31m",
     "BLUE": "\033[1;34m",
