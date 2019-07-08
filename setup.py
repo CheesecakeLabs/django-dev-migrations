@@ -1,4 +1,12 @@
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+
+from django_nomad.git.install_hook import install_checkout_hook
+
+
+class InstallCheckoutHookCommand(install):
+    def run(self):
+        install_checkout_hook()
 
 
 setup(
@@ -20,4 +28,9 @@ setup(
     name="django-nomad",
     packages=find_packages(),
     version="0.0.3",
+    cmdclass={
+        "install": InstallCheckoutHookCommand,
+        "develop": InstallCheckoutHookCommand,
+        "egg_info": InstallCheckoutHookCommand,
+    },
 )

@@ -1,9 +1,9 @@
-#!/Users/bsmaniotto/.pyenv/versions/django-nomad/bin/python
+#!/usr/bin/env python
 
 import os
 import sys
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) > 3:
         current = sys.argv[1]
         target = sys.argv[2]
@@ -12,6 +12,8 @@ if __name__ == '__main__':
         if not is_branch:
             sys.exit(0)
         else:
-            output = os.system('python manage.py check_nomad_migrations %s %s' % (current, target))
+            output = os.system(
+                "python manage.py check_nomad_migrations %s %s" % (current, target)
+            )
             if output > 0:
-                print('An error happened checking migrations.')
+                print("An error happened checking migrations.")
