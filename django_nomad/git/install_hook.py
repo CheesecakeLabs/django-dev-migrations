@@ -4,6 +4,8 @@ import sys
 from django_nomad.git.exceptions import GitHookAlreadyExists
 from django_nomad.git.utils import find_git_directory
 
+from .exceptions import GitDirNotFound
+
 
 HOOK_TEMPLATE = """#!{shebang}
 
@@ -58,7 +60,11 @@ def install_checkout_hook():
     Creates a post-checkout executable file inside git hooks folder that checks
     migration files
     """
-    git_path = find_git_directory()
+    try:
+        git_path = find_git_directory()
+    except GitDirNotFound:
+        return
+
     hooks_path = os.path.join(git_path, "hooks")
     post_checkout_path = os.path.abspath(os.path.join(hooks_path, "post-checkout"))
 

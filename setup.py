@@ -8,13 +8,13 @@ from django_nomad.git.install_hook import install_checkout_hook
 class LocalCheckoutHookCommand(develop):
     def run(self, *args, **kwargs):
         install_checkout_hook()
-        super().run()
+        develop.run(self)
 
 
 class InstallCheckoutHookCommand(install):
     def run(self):
         install_checkout_hook()
-        super().run()
+        install.run(self)
 
 
 setup(
@@ -35,6 +35,6 @@ setup(
     install_requires=["django"],
     name="django-nomad",
     packages=find_packages(),
-    version="0.1.1",
+    version="0.1.2",
     cmdclass={"local": LocalCheckoutHookCommand, "install": InstallCheckoutHookCommand},
 )
