@@ -35,6 +35,6 @@ setup(
     install_requires=["django"],
     name="django-nomad",
     packages=find_packages(),
-    version="0.0.3",
+    version="0.1.0",
     cmdclass={"local": LocalCheckoutHookCommand, "install": InstallCheckoutHookCommand},
 )
