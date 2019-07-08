@@ -9,6 +9,7 @@ venv/
 
 # Distribution tars
 dist/
+build/
 
 # Test files
 .tox/

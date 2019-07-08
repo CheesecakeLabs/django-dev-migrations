@@ -40,12 +40,17 @@ def create_user_env_python_shebang():
 
 def has_post_checkout_file(post_checkout_path):
     """
-    Verify if there is a file called post-checkout inside the git hooks folder
+    Verify if there is a file called post-checkout inside the git hooks folder with
+    content different than the migrations hook.
 
     Returns:
     bool: True, if the file is exists.
     """
-    return os.path.exists(post_checkout_path)
+    if os.path.exists(post_checkout_path):
+        with open(post_checkout_path, "r") as post_checkout_hook:
+            content = post_checkout_hook.read()
+            return "python manage.py check_nomad_migrations" not in content
+    return False
 
 
 def install_checkout_hook():
@@ -56,7 +61,6 @@ def install_checkout_hook():
     git_path = find_git_directory()
     hooks_path = os.path.join(git_path, "hooks")
     post_checkout_path = os.path.abspath(os.path.join(hooks_path, "post-checkout"))
-    print(post_checkout_path)
 
     if has_post_checkout_file(post_checkout_path):
         raise GitHookAlreadyExists()
@@ -64,7 +68,6 @@ def install_checkout_hook():
     with open(post_checkout_path, "w") as f:
         shebang = create_user_env_python_shebang()
         f.write(HOOK_TEMPLATE.format(shebang=shebang))
-    os.chmod(post_checkout_path, 0o555)
 
 
 def uninstall_checkout_hook():

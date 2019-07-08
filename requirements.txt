@@ -1,6 +1,3 @@
-# This own package
--e .
-
 # Code style
 black
 

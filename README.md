@@ -60,3 +60,10 @@ actually the `.git` folder used by git to control refs, it is renamed to `.git` 
 tests. There are two branched in this project: `master` and `newbranch`. In the code
 referenced by `newbranch`, there's a Nomad migration and the pre-checkout hook should
 print a error message when checking out to `master`.
+
+Note2: if the installed hook needs to be updated in `test_project`:
+
+1. rename `dot.git` to `.git`
+1. `cd tests/test_project`
+1. remove `.git/hooks/post-checkout`
+1. run `python ../../setup.py local`
