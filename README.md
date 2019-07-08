@@ -3,6 +3,11 @@
 A Django extension to make your life easier when dealing with migrations in multiple
 branches.
 
+## Definition
+
+A Nomad database migration happens when schema changes are applied to the database, but
+are not reflected on migration nor models files.
+
 ## Installing
 
 Install via pip:
@@ -20,11 +25,10 @@ INSTALLED_APPS = (
 )
 ```
 
-Add the git-hook to your project:
+A post-checkout git-hook will be added to your project.
 
-```
-python manage.py install_nomad_git_hook
-```
+NOTE: to completely uninstalling the package, you have to delete
+`.git/hooks/post-checkout`
 
 ## Contributing
 
